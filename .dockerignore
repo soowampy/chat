@@ -1,0 +1,7 @@
+# Ignore Gradle files
+.gradle
+build
+
+# Ignore temporary files
+*.log
+*.tmp
