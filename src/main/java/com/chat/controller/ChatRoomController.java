@@ -29,4 +29,12 @@ public final class ChatRoomController {
     public ResponseEntity<List<ChatRoomDTO>> getAllChatRooms() {
         return ResponseEntity.ok(chatRoomService.getAllChatRooms());
     }
+
+    /**
+     * 새로운 채팅방을 생성한다.
+     * */
+    @PostMapping
+    public ResponseEntity<ChatRoom> createChatRoom(@RequestBody String title) {
+        return ResponseEntity.ok(chatRoomService.createChatRoom(title));
+    }
 }

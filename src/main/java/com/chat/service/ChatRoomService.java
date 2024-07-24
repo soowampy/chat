@@ -61,4 +61,12 @@ public class ChatRoomService {
         Set<String> activeUsers = redisTemplate.opsForZSet().rangeByScore(CHATROOM_ACTIVE_USERS + ":" + roomId, thirtyMinutesAgo, now);
         return activeUsers != null ? activeUsers.size() : 0;
     }
+
+    @Transactional
+    public ChatRoom createChatRoom(String title) {
+        ChatRoom chatRoom = new ChatRoom(title);
+        chatRoomRepository.save(chatRoom);
+        messagingTemplate.convertAndSend("/topic/chatrooms", chatRoom);
+        return chatRoom;
+    }
 }
