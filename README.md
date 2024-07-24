@@ -16,15 +16,25 @@ Docker-compose
 
 ### Docker Hub pull
 
-`docker pull suwampy/chat:latest`
+1. GitHub에서 프로젝트를 클론 받습니다.
 
-`docker run -d -p 8080:8080 suwampy/chat:latest`
+   `git clone https://github.com/soowampy/chat.git`
 
+2. docker hub에서 해당 프로젝트를 pull 받습니다.
 
+   `docker pull suwampy/chat:latest`
+
+3. 프로젝트 최상단에서 docker-compose 를 실행합니다.
+
+   `docker-compose up`
+
+   
 
 ### Build 후 Local 실행
 
 1. GitHub에서 프로젝트를 클론 받습니다.
+
+   `git clone https://github.com/soowampy/chat.git`
 
 2. gradle build를 실행합니다.
 
