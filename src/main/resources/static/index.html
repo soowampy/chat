@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채팅방</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    #nickname-input, #app, #chat {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #rooms {
+      list-style: none;
+      padding: 0;
+    }
+
+    #rooms li {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    #rooms li:hover {
+      background-color: #f4f4f9;
+    }
+
+    #messages {
+      list-style: none;
+      padding: 0;
+    }
+
+    #messages li {
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #messages li:last-child {
+      border-bottom: none;
+    }
+
+  </style>
+</head>
+<body>
+<div id="nickname-input">
+  <h1>닉네임 생성</h1>
+  <input type="text" id="nickname" placeholder="닉네임을 입력하세요">
+  <button onclick="setNickname()">채팅방 입장</button>
+</div>
+
+<div id="app" style="display:none;">
+  <h1>채팅방</h1>
+  <div>
+    <input type="text" id="room-title" placeholder="채팅방 이름을 입력하세요">
+    <button onclick="createRoom()">채팅방 만들기</button>
+  </div>
+  <ul id="rooms"></ul>
+</div>
+
+<div id="chat" style="display:none;">
+  <h2 id="room-name"></h2>
+  <ul id="messages"></ul>
+  <input type="text" id="message-input" placeholder="메세지를 입력하세요">
+  <button onclick="sendMessage()">전송</button>
+  <button onclick="leaveRoom()">채팅방 나가기</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
