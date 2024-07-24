@@ -8,6 +8,7 @@ services:
       - "6379:6379"
 
   app:
+    image: suwampy/chat:latest
     build:
       context: .
       dockerfile: Dockerfile
