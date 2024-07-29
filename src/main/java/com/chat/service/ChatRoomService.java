@@ -28,11 +28,7 @@ public class ChatRoomService {
     public List<ChatRoomDTO> getAllChatRooms() {
         Set<TypedTuple<String>> activeUserCounts = redisTemplate.opsForZSet()
             .reverseRangeWithScores(CHATROOM_ACTIVE_USERS, 0, -1);
-
-        List<String> roomIdsSortedByActiveUsers = activeUserCounts.stream()
-            .map(ZSetOperations.TypedTuple::getValue)
-            .collect(Collectors.toList());
-
+        
         List<ChatRoom> chatRooms = chatRoomRepository.findAll();
         List<ChatRoomDTO> chatRoomDTOs = new ArrayList<>();
 
@@ -42,9 +38,11 @@ public class ChatRoomService {
         }
 
         chatRoomDTOs.sort((a, b) -> {
-            int idxA = roomIdsSortedByActiveUsers.indexOf(a.getId().toString());
-            int idxB = roomIdsSortedByActiveUsers.indexOf(b.getId().toString());
-            return Integer.compare(idxA, idxB);
+            int activeUsersComparison = Integer.compare(b.getActiveUsers(), a.getActiveUsers());
+            if (activeUsersComparison != 0) {
+                return activeUsersComparison;
+            }
+            return a.getTitle().compareTo(b.getTitle());
         });
 
         return chatRoomDTOs;
