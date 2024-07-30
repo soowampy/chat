@@ -26,9 +26,6 @@ public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
 
     public List<ChatRoomDTO> getAllChatRooms() {
-        Set<TypedTuple<String>> activeUserCounts = redisTemplate.opsForZSet()
-            .reverseRangeWithScores(CHATROOM_ACTIVE_USERS, 0, -1);
-        
         List<ChatRoom> chatRooms = chatRoomRepository.findAll();
         List<ChatRoomDTO> chatRoomDTOs = new ArrayList<>();
 
